@@ -25,6 +25,18 @@ li {
   background-color: black;
 }
 
+.wrapper {
+  width: 100%;
+  padding: 0 5%;
+
+  .content {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1385px;
+    height: auto;
+  }
+}
+
 .btn {
   border: none;
   cursor: pointer;
