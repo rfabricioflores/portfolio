@@ -1,9 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
   imports: [],
-  template: ` <p>footer works!</p> `,
+  template: `
+    <footer class="content">
+      <p>Fabricio's cool portfolio</p>
+    </footer>
+  `,
+  styles: `
+    :host {
+      display: block;
+    }
+  `,
 })
-export class FooterComponent {}
+export class FooterComponent {
+  @HostBinding('class')
+  readonly class = 'wrapper';
+}
