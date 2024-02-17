@@ -85,6 +85,9 @@ devDependencies:
   '@nx/vite':
     specifier: ~18.0.0
     version: 18.0.4(@types/node@20.11.19)(nx@18.0.4)(typescript@5.3.3)(vite@5.0.12)(vitest@1.2.2)
+  '@types/node':
+    specifier: ^20.11.19
+    version: 20.11.19
   jsdom:
     specifier: ^22.1.0
     version: 22.1.0
