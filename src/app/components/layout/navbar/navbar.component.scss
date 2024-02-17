@@ -1,0 +1,19 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+nav {
+    margin: 0 auto;
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+
+    menu {
+        display: flex;
+
+        li {
+            font-weight: 600;
+        }
+    }
+}
