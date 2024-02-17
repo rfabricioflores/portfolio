@@ -1,5 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+@use '~/colors' as *;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $white;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
 :root {
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  font-size: 15px;
+  background-color: black;
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 37.5px;
+  color: $white;
+  background-color: $purple-to-skyblue;
+  font-weight: 600;
+
+  &:hover, &:focus {
+    filter: brightness(1.1);
+  }
 }
