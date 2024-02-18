@@ -1,0 +1,10 @@
+@use '~/colors' as *;
+
+@mixin txt-purple-to-skyblue {
+  background-image: $purple-to-skyblue;
+  background-clip: $purple-to-skyblue;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
