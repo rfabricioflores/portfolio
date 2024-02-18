@@ -43,7 +43,8 @@ li {
   text-align: center;
   border-radius: 37.5px;
   color: $white;
-  background-color: $purple-to-skyblue;
+  background: $purple-to-skyblue;
+  padding: 14px 24px;
   font-weight: 600;
 
   &:hover, &:focus {
