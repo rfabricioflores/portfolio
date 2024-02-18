@@ -1,19 +1,33 @@
+@use '~/colors' as *;
+
 :host {
-    display: block;
-    width: 100%;
+  display: block;
+  background: $blue-dark-to-light;
 }
 
 nav {
-    margin: 0 auto;
-    width: 1200px;
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  menu {
     display: flex;
-    justify-content: space-between;
+    column-gap: 3rem;
 
-    menu {
-        display: flex;
-
-        li {
-            font-weight: 600;
-        }
+    li {
+      font-weight: 600;
     }
+  }
+
+  .social-media {
+    display: flex;
+    align-items: center;
+    column-gap: 1.2rem;
+
+    >a > img {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
 }
