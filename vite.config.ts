@@ -14,6 +14,8 @@ export default defineConfig(({ mode }) => ({
     mainFields: ['module'],
     alias: {
       '~': resolve(__dirname, 'src/app/styles'),
+      '@components': resolve(__dirname, 'src/app/components'),
+      '@assets': resolve(__dirname, 'src/assets'),
     },
   },
   plugins: [
