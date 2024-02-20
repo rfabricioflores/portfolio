@@ -9,7 +9,7 @@
   -moz-text-fill-color: transparent;
 }
 
-@mixin respond($breakpoint) {
+@mixin breakpoint($breakpoint) {
   @if $breakpoint == phone {
     @media only screen and (max-width: 768px) {
       @content;
