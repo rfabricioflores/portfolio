@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,4 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export default class HeaderComponent {}
+export default class HeaderComponent {
+  @HostBinding('class')
+  readonly class = 'wrapper';
+}

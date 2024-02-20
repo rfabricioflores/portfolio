@@ -1,6 +1,11 @@
 @use '~/colors' as *;
 @use '~/mixins' as *;
 
+:host {
+  display: block;
+  background: $blue-dark-to-light;
+}
+
 header {
   display: flex;
   align-items: center;
