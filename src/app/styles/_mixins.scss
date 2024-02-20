@@ -8,3 +8,26 @@
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
 }
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media only screen and (max-width: 1023px) and (min-width: 767px) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet + phone {
+    @media only screen and (max-width: 1023px) {
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 1024px) {
+      @content;
+    }
+  }
+}
