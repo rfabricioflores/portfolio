@@ -1,0 +1,73 @@
+@use '~/colors' as *;
+
+:host {
+  display: block;
+  background: $blue-light-to-dark;
+
+  .content {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    >.photoWrapper {
+      position: relative;
+      width: 260px;
+      height: 300px;
+
+      >img {
+        position: relative;
+        width: inherit;
+        height: inherit;
+        z-index: 2;
+      }
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: inherit;
+        height: inherit;
+        top: 10%;
+        left: 10%;
+        background-image: url('/about-img-border.svg');
+        background-size: cover;
+      }
+
+      &::after {
+        content: '';
+        display: block;
+        width: inherit;
+        height: inherit;
+        background: linear-gradient($purple 0%, $skyblue 100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        filter: blur(15px);
+        z-index: 1;
+      }
+    }
+
+    >.info {
+      max-width: 40%;
+      color: rgb(173, 173, 173);
+
+      h2 {
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+
+      p {
+        margin: 2rem 0 3rem 0;
+      }
+
+      .btn {
+        width: 130px;
+
+        &:last-child {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+}
