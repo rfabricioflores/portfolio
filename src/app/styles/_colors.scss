@@ -1,8 +1,10 @@
 $white: #FFF;
 $dark-blue: #121B32;
 $light-blue: #1A2747;
-$purple: #B786F5;
-$skyblue: #1196CF;
+$purple-hex: #B786F5;
+$skyblue-hex: #1196CF;
+$purple: rgba(183, 134, 245, 77%);
+$skyblue: rgba(118, 223, 246, 100%);
 $purple-to-skyblue: linear-gradient(90deg, $purple 0%, $skyblue 100%);
 $blue-dark-to-light: linear-gradient(90deg, $dark-blue 0%, $light-blue 100%);
 $blue-light-to-dark: linear-gradient(90deg, $light-blue 0%, $dark-blue 100%);
