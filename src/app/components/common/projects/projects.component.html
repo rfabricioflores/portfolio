@@ -1,25 +1,46 @@
 <section class="content">
   <h2>Projects</h2>
-  <div class="projects">
-    @for (project of projects; track $index) {
-      <article #article>
-        <img [src]="project.image" alt="project photo" class="image">
-        <h3>{{project.title}}</h3>
-        <p>{{project.description}}</p>
-        <div class="buttons">
-          @if (project.previewLink) {
-            <a class="btn" [href]="project.previewLink" target="_blank">Preview</a>
-          }
-          @if (project.sourceCode) {
-            <a class="btn" [href]="project.sourceCode" target="_blank">Github</a>
-          }
-        </div>
-
-        @if (isBrowser ) {
-          {{article.offsetWidth}}
-          <app-icon-border [width]="article.offsetWidth" [height]="article.offsetHeight" class="bg" />
+  @if(isBrowser) {
+    <div class="projects">
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" >
+        @for (project of projects; track $index) {
+          <article ngxSlickItem class="slide">
+            <img [src]="project.image" alt="project photo" class="image">
+            <h3>{{project.title}}</h3>
+            <p [innerHTML]="project.description"></p>
+            <div class="buttons">
+              @if (project.previewLink) {
+                <a class="btn" [href]="project.previewLink" target="_blank">Preview</a>
+              }
+              @if (project.sourceCode) {
+                <a class="btn" [href]="project.sourceCode" target="_blank">Github</a>
+              }
+            </div>
+            <app-icon-border class="bg" [strokeWidth]="1" position="up"/>
+          </article>
         }
-      </article>
-    }
-  </div>
+      </ngx-slick-carousel>
+    </div>
+  }
+
+  @if(isServer) {
+    <div class="projects ssr">
+      @for (project of projects; track $index) {
+        <article class="slide">
+          <img [src]="project.image" alt="project photo" class="image">
+          <h3>{{project.title}}</h3>
+          <p [innerHTML]="project.description"></p>
+          <div class="buttons">
+            @if (project.previewLink) {
+              <a class="btn" [href]="project.previewLink" target="_blank">Preview</a>
+            }
+            @if (project.sourceCode) {
+              <a class="btn" [href]="project.sourceCode" target="_blank">Github</a>
+            }
+          </div>
+          <app-icon-border class="bg" position="up"/>
+        </article>
+      }
+    </div>
+  }
 </section>
