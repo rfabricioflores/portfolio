@@ -1,0 +1,79 @@
+@use '~/colors' as *;
+@use '~/mixins' as *;
+
+:host {
+  display: block;
+  background: $blue-light-to-dark;
+
+  .content {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    h2 {
+      text-transform: uppercase;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+}
+
+.accordion {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-rows: .5fr;
+  transition: grid-template-rows .2s ease-out;
+  overflow: hidden;
+}
+
+.accordion.open {
+  grid-template-rows: 1fr;
+}
+
+.experience-wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  column-gap: 2rem;
+  height: fit-content;
+  padding-left: 1rem;
+
+  .line {
+    width: .2rem;
+    min-height: 100%;
+    background: $purple-to-skyblue-to-bottom;
+    border-radius: .5rem;
+  }
+
+  .experience-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 4rem;
+
+    >div {
+      position: relative;
+
+      h4, p {
+        color: #D1D1D1;
+      }
+
+      h3 {
+        font-weight: 600;
+      }
+
+      &::before {
+        z-index: 1;
+        content: '';
+        display: block;
+        position: absolute;
+        left: -2.1rem;
+        top: .25rem;
+        transform: translateX(-50%);
+        background: $purple-to-skyblue;
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 50%;
+      }
+    }
+  }
+}
