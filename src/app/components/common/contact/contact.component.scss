@@ -1,0 +1,89 @@
+@use '~/colors' as *;
+@use '~/mixins' as *;
+
+:host {
+  display: block;
+  background: $blue-dark-to-light;
+
+  .content {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    h2 {
+      text-transform: uppercase;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    >div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-top: 5rem;
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        width: 40%;
+
+        .btn {
+          width: fit-content;
+        }
+
+        .input {
+          position: relative;
+          width: 100%;
+          padding: 2px;
+          overflow: hidden;
+          border-radius: 14px;
+
+          input, textarea {
+            color: white;
+            width: 100%;
+            height: 100%;
+            appearance: none;
+            outline: none;
+            background-color: transparent;
+            border: none;
+            padding: 1rem 1rem;
+            border: 50%;
+
+            &::placeholder {
+              color: inherit;
+              opacity: .8;
+            }
+          }
+
+          textarea {
+            resize: none;
+
+            &::-webkit-scrollbar {
+              width: 8px;
+              height: 10px;
+              &:hover {
+                cursor: initial;
+              }
+            }
+            &::-webkit-scrollbar-thumb {
+              border-radius: 8px;
+              background: #c2c9d2;
+
+              &:hover {
+                cursor: initial;
+              }
+            }
+          }
+        }
+      }
+
+      @include breakpoint(tablet + phone) {
+        flex-direction: column;
+
+        .form {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
