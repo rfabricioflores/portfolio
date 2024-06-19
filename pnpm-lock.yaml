@@ -44,6 +44,9 @@ dependencies:
   front-matter:
     specifier: ^4.0.2
     version: 4.0.2
+  jquery:
+    specifier: ^3.7.1
+    version: 3.7.1
   marked:
     specifier: ^5.0.2
     version: 5.1.2
@@ -56,12 +59,18 @@ dependencies:
   mermaid:
     specifier: ^10.2.4
     version: 10.8.0
+  ngx-slick-carousel:
+    specifier: ^17.0.0
+    version: 17.0.0(@angular/common@17.2.1)(@angular/core@17.2.1)(@angular/forms@17.2.1)(rxjs@7.5.7)(zone.js@0.14.4)
   prismjs:
     specifier: ^1.29.0
     version: 1.29.0
   rxjs:
     specifier: ~7.5.6
     version: 7.5.7
+  slick-carousel:
+    specifier: ^1.8.1
+    version: 1.8.1(jquery@3.7.1)
   tslib:
     specifier: ^2.4.0
     version: 2.6.2
@@ -7965,6 +7974,10 @@ packages:
     resolution: {integrity: sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==}
     hasBin: true
 
+  /jquery@3.7.1:
+    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
+    dev: false
+
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -8925,6 +8938,23 @@ packages:
 
   /neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
+
+  /ngx-slick-carousel@17.0.0(@angular/common@17.2.1)(@angular/core@17.2.1)(@angular/forms@17.2.1)(rxjs@7.5.7)(zone.js@0.14.4):
+    resolution: {integrity: sha512-4GS13vjbfEUzQR6St9tq9ms69ODSxkPR0HhXJ97YhDlOlbirk9wHxnSKNneutitlKIt9G/MCrIV4u0L3wiC8rQ==}
+    peerDependencies:
+      '@angular/common': ^17.0.0
+      '@angular/core': ^17.0.0
+      '@angular/forms': ^17.0.0
+      rxjs: ^7.0.0
+      zone.js: '>=0.10.2'
+    dependencies:
+      '@angular/common': 17.2.1(@angular/core@17.2.1)(rxjs@7.5.7)
+      '@angular/core': 17.2.1(rxjs@7.5.7)(zone.js@0.14.4)
+      '@angular/forms': 17.2.1(@angular/common@17.2.1)(@angular/core@17.2.1)(@angular/platform-browser@17.2.1)(rxjs@7.5.7)
+      rxjs: 7.5.7
+      tslib: 2.6.2
+      zone.js: 0.14.4
+    dev: false
 
   /nice-napi@1.0.2:
     resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}
@@ -10743,6 +10773,14 @@ packages:
     resolution: {integrity: sha512-ZA6oR3T/pEyuqwMgAKT0/hAv8oAXckzbkmR0UkUosQ+Mc4RxGoJkRmwHgHufaenlyAgE1Mxgpdcrf75y6XcnDg==}
     engines: {node: '>=14.16'}
     dev: true
+
+  /slick-carousel@1.8.1(jquery@3.7.1):
+    resolution: {integrity: sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==}
+    peerDependencies:
+      jquery: '>=1.8.0'
+    dependencies:
+      jquery: 3.7.1
+    dev: false
 
   /smart-buffer@4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
