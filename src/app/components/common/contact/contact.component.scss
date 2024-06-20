@@ -57,22 +57,6 @@
 
           textarea {
             resize: none;
-
-            &::-webkit-scrollbar {
-              width: 8px;
-              height: 10px;
-              &:hover {
-                cursor: initial;
-              }
-            }
-            &::-webkit-scrollbar-thumb {
-              border-radius: 8px;
-              background: #c2c9d2;
-
-              &:hover {
-                cursor: initial;
-              }
-            }
           }
         }
       }

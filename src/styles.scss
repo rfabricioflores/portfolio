@@ -2,6 +2,23 @@
 @use '/node_modules/slick-carousel/slick/slick.scss' as *;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+  &:hover {
+    cursor: initial;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #c2c9d2;
+
+  &:hover {
+    cursor: initial;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
