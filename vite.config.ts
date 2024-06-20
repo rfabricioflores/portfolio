@@ -21,6 +21,9 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     analog({
+      prerender: {
+        routes: async () => ['/'],
+      },
       vite: {
         inlineStylesExtension: 'scss',
       },
