@@ -2,6 +2,7 @@
 
 import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
+import { normalizePath } from 'vite';
 import { resolve } from 'node:path';
 
 // https://vitejs.dev/config/
@@ -13,9 +14,9 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     mainFields: ['module'],
     alias: {
-      '~': resolve(__dirname, 'src/app/styles'),
-      '@components': resolve(__dirname, 'src/app/components'),
-      '@assets': resolve(__dirname, 'src/assets'),
+      '~': normalizePath(resolve(__dirname, 'src/app/styles')),
+      '@components': normalizePath(resolve(__dirname, 'src/app/components')),
+      '@assets': normalizePath(resolve(__dirname, 'src/assets')),
     },
   },
   plugins: [
