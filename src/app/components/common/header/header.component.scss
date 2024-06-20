@@ -15,6 +15,10 @@ header {
   .info {
     max-width: 50%;
 
+    @include breakpoint(tablet + phone) {
+      max-width: 100%;
+    }
+
     h1 {
       > span {
         font-weight: 900;
@@ -35,6 +39,10 @@ header {
 
   .techs {
     transform: translateX(5%);
+
+    @include breakpoint(tablet + phone) {
+      display: none;
+    }
     >img {
       animation: rotate 12s linear infinite;
     }
