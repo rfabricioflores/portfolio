@@ -37,6 +37,22 @@ export default class ProjectsComponent {
     slidesToScroll: 2,
     infinite: false,
     isServer: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1.2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
     prevArrow: `
         <svg
         style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 1; cursor: pointer;"
