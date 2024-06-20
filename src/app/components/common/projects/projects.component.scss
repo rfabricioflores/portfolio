@@ -64,9 +64,13 @@ section {
 
 
     &.ssr {
-      display: grid;
-      width: unset;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+
+      article {
+        min-width: 25rem;
+      }
     }
   }
 }
