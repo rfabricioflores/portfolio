@@ -10,6 +10,9 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+/src/assets/libs/*.js
+/src/assets/libs/*.css
+/src/assets/libs/*.html
 
 # IDEs and editors
 .idea/
