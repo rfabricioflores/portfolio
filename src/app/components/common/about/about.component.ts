@@ -1,9 +1,10 @@
 import { Component, HostBinding } from '@angular/core';
+import BorderComponent from '@components/icons/border.component';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [],
+  imports: [BorderComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
 })

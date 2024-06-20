@@ -22,16 +22,9 @@
         z-index: 2;
       }
 
-      &::before {
-        content: '';
-        display: block;
-        position: absolute;
-        width: inherit;
-        height: inherit;
+      .border {
         top: 10%;
         left: 10%;
-        background-image: url('/about-img-border.svg');
-        background-size: cover;
       }
 
       &::after {
