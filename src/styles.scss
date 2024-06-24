@@ -55,6 +55,11 @@ li {
   }
 }
 
+button:disabled {
+  pointer-events: none;
+  opacity: .5;
+}
+
 .btn {
   border: none;
   cursor: pointer;
