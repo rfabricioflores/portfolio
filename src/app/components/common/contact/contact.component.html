@@ -31,23 +31,32 @@
         </svg>
     </section>
 
-    <section class="form">
+    <form class="form" [formGroup]="contactForm" (ngSubmit)="submitForm()">
 
       <div class="input">
-        <input type="text" placeholder="Name *">
+        <input type="text" placeholder="Name *" formControlName="name">
         <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
       </div>
 
       <div class="input">
-        <input type="text" placeholder="Email *">
+        <input type="text" placeholder="Email *" formControlName="email">
         <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
       </div>
 
       <div class="input">
-        <textarea type="text" placeholder="Your message *" rows="6" ></textarea>
+        <textarea type="text" placeholder="Your message *" rows="6" formControlName="message"></textarea>
         <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
       </div>
-      <button class="btn">Send</button>
-    </section>
+      <button class="btn" [disabled]="(contactForm.invalid || isLoading())" >
+        @if(isLoading()) {
+          Sending...
+        } @else {
+          Send
+        }
+      </button>
+      @if (message()) {
+        <p>{{message()}}</p>
+      }
+    </form>
   </div>
 </section>
