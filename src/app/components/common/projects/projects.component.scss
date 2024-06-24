@@ -37,6 +37,13 @@ section {
         height: 11rem;
       }
 
+      @include breakpoint(tablet + phone) {
+        height: 410px;
+        .image {
+          height: 8rem;
+        }
+      }
+
       >h3 {
         font-weight: 600;
         margin: 2rem 0 1rem 0;
@@ -59,6 +66,13 @@ section {
         padding: 0 2rem 2rem 2rem;
         display: flex;
         column-gap: 1rem;
+
+        @include breakpoint(tablet + phone) {
+          a {
+            padding: .8rem 1.5rem;
+            font-size: 1rem;
+          }
+        }
       }
     }
 

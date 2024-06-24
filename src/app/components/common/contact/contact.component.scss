@@ -21,6 +21,10 @@
       justify-content: space-between;
       padding-top: 5rem;
 
+      @include breakpoint(tablet + phone) {
+        padding-top: 1rem;
+      }
+
       .form {
         display: flex;
         flex-direction: column;

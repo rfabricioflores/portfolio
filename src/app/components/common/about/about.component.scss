@@ -16,6 +16,11 @@
       width: 260px;
       height: 300px;
 
+      @include breakpoint(tablet + phone) {
+        width: 15rem;
+        height: 18rem;
+      }
+
       >img {
         position: relative;
         width: inherit;
@@ -66,6 +71,7 @@
 
     @include breakpoint(tablet + phone) {
       flex-direction: column;
+      row-gap: 3rem;
       height: auto;
       padding-top: 5rem;
       padding-bottom: 5rem;
