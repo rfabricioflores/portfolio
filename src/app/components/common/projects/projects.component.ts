@@ -48,7 +48,7 @@ export default class ProjectsComponent {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1.2,
+          slidesToShow: 1.1,
           slidesToScroll: 1,
         },
       },
