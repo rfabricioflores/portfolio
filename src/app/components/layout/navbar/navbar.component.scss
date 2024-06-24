@@ -1,4 +1,5 @@
 @use '~/colors' as *;
+@use '~/mixins' as *;
 
 :host {
   display: block;
@@ -11,23 +12,92 @@ nav {
   justify-content: space-between;
   align-items: center;
 
-  menu {
-    display: flex;
-    column-gap: 3rem;
+  .logo {
+    z-index: 21;
+  }
 
-    li {
-      font-weight: 600;
+  .menu-icon, .close-icon {
+    display: none;
+    width: 3rem;
+    height: 2rem;
+    margin-top: 2rem;
+    align-self: flex-start;
+    cursor: pointer;
+    z-index: 21;
+
+    @include breakpoint(tablet + phone){
+      display: block;
     }
   }
 
-  .social-media {
+  .nav-content {
+    width: 100%;
     display: flex;
-    align-items: center;
-    column-gap: 1.2rem;
+    justify-content: space-between;
 
-    >a > img {
-      width: 1.6rem;
-      height: 1.6rem;
+    menu {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      column-gap: 3rem;
+
+      li {
+        font-weight: 600;
+      }
+    }
+
+    .social-media {
+      display: flex;
+      column-gap: 1.2rem;
+
+      >a > img {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+    }
+
+    @include breakpoint(tablet + phone){
+      top: 0;
+      left: 0;
+      position: absolute;
+      height: 0;
+      z-index: 20;
+      background: $blue-dark-to-light;
+      padding: 0 5%;
+      overflow-y: auto;
+      display: block;
+      transform-origin: 100% 0 0;
+      transition: all .3s ease-in-out;
+      transform: scale(.5);
+
+      menu {
+        margin-top: 8rem;
+        height: calc(70% - 8rem);
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        li {
+          font-size: 1.5rem;
+        }
+      }
+
+      .social-media {
+        height: 20%;
+        justify-content: space-around;
+        align-items: flex-end;
+
+        >a > img {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
+
+    &.open {
+      opacity: 1;
+      transform: scale(1);
+      height: 100vh;
     }
   }
 }
