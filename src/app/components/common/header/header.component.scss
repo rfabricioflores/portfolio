@@ -10,7 +10,13 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50vh !important;
+  height: 60vh !important;
+
+  @include breakpoint(tablet + phone) {
+    height: auto !important;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
 
   .info {
     max-width: 50%;
