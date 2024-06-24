@@ -4,16 +4,8 @@ import { Component, HostBinding } from '@angular/core';
   selector: 'app-footer',
   standalone: true,
   imports: [],
-  template: `
-    <footer class="content">
-      <p>Fabricio's cool portfolio</p>
-    </footer>
-  `,
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
   @HostBinding('class')

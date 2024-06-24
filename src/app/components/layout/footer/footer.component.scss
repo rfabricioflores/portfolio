@@ -1,0 +1,12 @@
+@use '~/colors.scss' as *;
+
+:host {
+  border-top: 2px solid #c2c9d2;
+  display: block;
+  background: $blue-dark-to-light;
+}
+
+footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
