@@ -21,6 +21,9 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     analog({
+      nitro: {
+        serveStatic: false,
+      },
       prerender: {
         routes: async () => ['/'],
       },
