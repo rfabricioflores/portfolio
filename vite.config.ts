@@ -7,6 +7,9 @@ import { resolve } from 'node:path';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  ssr: {
+    noExternal: ['ngx-slick-carousel'],
+  },
   publicDir: 'src/assets',
   build: {
     target: ['es2020'],
