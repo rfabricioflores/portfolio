@@ -17,11 +17,11 @@ export default class ExperienceComponent {
     {
       title: 'System Developer',
       description: `
-        • Webbutveckling
-        • Webbdesign
-        • API utveckling
+        • Web development
+        • Web design
+        • API development
         • Testing
-        • A/B testning
+        • A/B testing
       `,
       company: 'Turnpuu Consulting AB',
       date: '',
@@ -42,6 +42,7 @@ export default class ExperienceComponent {
       description: `
       • Electronics repair
       • Customer service and sales
+      • Inventory and other administrative tasks
       `,
       company: 'PHONEIX',
       date: '',
@@ -53,7 +54,7 @@ export default class ExperienceComponent {
       • Customer service
       • Electronics repair
       `,
-      company: 'PHONEIX',
+      company: 'Mimmi Electronics',
       date: '',
     },
   ];

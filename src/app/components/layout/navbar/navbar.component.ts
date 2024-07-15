@@ -15,4 +15,8 @@ export class NavbarComponent {
   readonly class = 'wrapper';
 
   public menuIsOpen = signal(false);
+
+  public onLinkClick() {
+    this.menuIsOpen() && this.menuIsOpen.set(false);
+  }
 }

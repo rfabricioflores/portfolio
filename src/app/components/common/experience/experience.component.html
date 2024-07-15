@@ -2,18 +2,18 @@
   <h2>Experience</h2>
 
   <div [class]="accordionStatus() ? 'accordion open' : 'accordion'">
-    <div class="experience-wrapper">
+    <div class="accordion-content">
       <div class="line"></div>
-      <div class="experience-list">
-        @for (exp of experiences; track $index) {
-          <div>
-            <h3>{{ exp.title }}</h3>
-            <h4>{{ exp.company }}</h4>
-            <p>{{ exp.description }}</p>
-          </div>
-        }
+        <ul class="experience-list">
+          @for (exp of experiences; track $index) {
+            <li>
+              <h3>{{ exp.title }}</h3>
+              <h4>{{ exp.company }}</h4>
+              <p>{{ exp.description }}</p>
+            </li>
+          }
+        </ul>
       </div>
-    </div>
     </div>
 
   <br>
