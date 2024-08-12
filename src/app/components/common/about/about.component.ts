@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import BorderComponent from '@components/icons/border.component';
+import { BorderComponent } from '@components/icons';
 
 @Component({
   selector: 'app-about',

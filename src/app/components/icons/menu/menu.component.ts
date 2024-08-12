@@ -19,4 +19,4 @@ import { Component } from '@angular/core';
     />
   </svg>`,
 })
-export class MenuComponent {}
+export default class MenuComponent {}

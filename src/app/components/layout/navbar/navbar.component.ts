@@ -1,7 +1,6 @@
 import { Component, HostBinding, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import CloseComponent from '@components/icons/close/close.component';
-import { MenuComponent } from '@components/icons/menu/menu.component';
+import { CloseComponent, MenuComponent } from '@components/icons';
 
 @Component({
   selector: 'app-navbar',

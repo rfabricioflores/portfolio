@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostBinding, inject, signal } from '@angular/core';
-import BorderComponent from '@components/icons/border.component';
+import { BorderComponent } from '@components/icons';
 import {
   FormBuilder,
   FormGroup,

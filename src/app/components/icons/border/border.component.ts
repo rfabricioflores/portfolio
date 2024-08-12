@@ -1,4 +1,5 @@
 import { Component, OnInit, input } from '@angular/core';
+
 @Component({
   selector: 'app-icon-border',
   standalone: true,

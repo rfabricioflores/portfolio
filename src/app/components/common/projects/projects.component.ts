@@ -1,6 +1,6 @@
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Component, HostBinding, PLATFORM_ID, inject } from '@angular/core';
-import BorderComponent from '@components/icons/border.component';
+import { BorderComponent } from '@components/icons';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 interface Project {
