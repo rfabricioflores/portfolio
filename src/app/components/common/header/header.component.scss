@@ -13,9 +13,12 @@ header {
   height: 60vh !important;
 
   @include breakpoint(tablet + phone) {
+    overflow: hidden;
     height: auto !important;
     padding-top: 3rem;
-    padding-bottom: 5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: unset;
   }
 
   .info {
@@ -44,13 +47,30 @@ header {
   }
 
   .techs {
-    transform: translateX(5%);
+    position: relative;
+    width: 25vh;
+    height: 25vh;
+    opacity: 0;
+    transition: all 0.5s;
+
+    >img {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      transition: all 200ms linear;
+    }
 
     @include breakpoint(tablet + phone) {
-      display: none;
-    }
-    >img {
-      animation: rotate 12s linear infinite;
+      margin-top: 1rem;
+      transform: translateY(40%);
+      width: 90%;
+      height: 20vh;
+
+      >img {
+        width: 35px;
+        height: 35px;
+      }
     }
   }
 }
