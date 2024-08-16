@@ -3,6 +3,8 @@ import {
   Component,
   ElementRef,
   HostBinding,
+  HostListener,
+  OnDestroy,
   ViewChild,
 } from '@angular/core';
 
@@ -12,30 +14,40 @@ import {
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
-export default class HeaderComponent {
+export default class HeaderComponent implements OnDestroy {
   @HostBinding('class')
   readonly class = 'wrapper';
 
-  @ViewChild('techs', { static: false }) base!: ElementRef<HTMLElement>;
+  @ViewChild('techs') base!: ElementRef<HTMLElement>;
 
   private radius: number = 0;
   private techsWAngle: {
     el: Element;
     angle: number;
   }[] = [];
+  private resizeObserver: ResizeObserver | null = null;
 
   constructor() {
     afterNextRender(() => {
       this.run();
+      this.resizeObserver = new ResizeObserver(() => {
+        this.radius = this.base.nativeElement.offsetWidth / 2;
+      });
+      this.resizeObserver.observe(this.base.nativeElement);
     });
   }
 
-  private run() {
-    this.radius = this.base.nativeElement.offsetWidth / 2;
-    const techs = Array.from(this.base.nativeElement.children);
+  ngOnDestroy() {
+    this.resizeObserver && this.resizeObserver.disconnect();
+  }
 
-    techs.forEach((item, index) => {
-      const angle = (index / techs.length) * 360;
+  private run() {
+    this.techsWAngle = [];
+    const icons = Array.from(this.base.nativeElement.children);
+    this.radius = this.base.nativeElement.offsetWidth / 2;
+
+    icons.forEach((item, index) => {
+      const angle = (index / icons.length) * 360;
       this.techsWAngle.push({ el: item, angle });
       this.calcPosition(item, angle);
     });
@@ -43,7 +55,7 @@ export default class HeaderComponent {
     this.base.nativeElement.style.opacity = '1';
 
     this.techsWAngle.forEach((techWAngle) => {
-      setInterval(() => {
+      const interval = setInterval(() => {
         techWAngle.angle -= 5;
         if (techWAngle.angle === 360) {
           techWAngle.angle = 0;
@@ -59,9 +71,8 @@ export default class HeaderComponent {
     xPos += this.radius;
     yPos += this.radius;
 
-    const style = `left: calc(${xPos}px - ${
-      el.clientWidth / 2
-    }px);top:calc(${yPos}px - ${el.clientWidth / 2}px);`;
+    const style = `left: calc(${xPos}px - ${el.clientWidth / 2}px);
+    top: calc(${yPos}px - ${el.clientHeight / 2}px);`;
     el.setAttribute('style', style);
   }
 }
