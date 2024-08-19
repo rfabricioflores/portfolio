@@ -2,37 +2,35 @@ import {
   afterNextRender,
   Component,
   ElementRef,
-  HostBinding,
-  HostListener,
   OnDestroy,
   ViewChild,
 } from '@angular/core';
+
+export interface TechIcon {
+  el: Element;
+  angle: number;
+}
 
 @Component({
   selector: 'app-header',
   standalone: true,
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
+  host: { class: 'wrapper' },
 })
 export default class HeaderComponent implements OnDestroy {
-  @HostBinding('class')
-  readonly class = 'wrapper';
-
-  @ViewChild('techs') base!: ElementRef<HTMLElement>;
-
-  private radius: number = 0;
-  private techsWAngle: {
-    el: Element;
-    angle: number;
-  }[] = [];
+  @ViewChild('techs')
+  private base!: ElementRef<HTMLElement>;
+  private radius = 0;
+  private icons: TechIcon[] = [];
   private resizeObserver: ResizeObserver | null = null;
 
   constructor() {
     afterNextRender(() => {
       this.run();
-      this.resizeObserver = new ResizeObserver(() => {
-        this.radius = this.base.nativeElement.offsetWidth / 2;
-      });
+      this.resizeObserver = new ResizeObserver(
+        () => (this.radius = this.base.nativeElement.offsetWidth / 2)
+      );
       this.resizeObserver.observe(this.base.nativeElement);
     });
   }
@@ -42,30 +40,27 @@ export default class HeaderComponent implements OnDestroy {
   }
 
   private run() {
-    this.techsWAngle = [];
-    const icons = Array.from(this.base.nativeElement.children);
     this.radius = this.base.nativeElement.offsetWidth / 2;
+    const children = Array.from(this.base.nativeElement.children);
 
-    icons.forEach((item, index) => {
-      const angle = (index / icons.length) * 360;
-      this.techsWAngle.push({ el: item, angle });
-      this.calcPosition(item, angle);
+    this.icons = children.map((el, index) => {
+      const angle = (index / children.length) * 360;
+      this.calcPosition({ el, angle });
+      return { el, angle };
     });
 
     this.base.nativeElement.style.opacity = '1';
 
-    this.techsWAngle.forEach((techWAngle) => {
-      const interval = setInterval(() => {
-        techWAngle.angle -= 5;
-        if (techWAngle.angle === 360) {
-          techWAngle.angle = 0;
-        }
-        this.calcPosition(techWAngle.el, techWAngle.angle);
+    this.icons.forEach((icon) => {
+      setInterval(() => {
+        icon.angle -= 5;
+        if (icon.angle === 360) icon.angle = 0;
+        this.calcPosition(icon);
       }, 200);
     });
   }
 
-  private calcPosition(el: Element, angle: number) {
+  private calcPosition({ el, angle }: TechIcon) {
     let xPos = Math.cos((angle * Math.PI) / 180) * this.radius;
     let yPos = Math.sin((angle * Math.PI) / 180) * this.radius;
     xPos += this.radius;
