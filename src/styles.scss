@@ -46,8 +46,9 @@ li {
 .wrapper {
   width: 100%;
   padding: 0 5%;
+  display: block;
 
-  .content {
+  >.content {
     margin: 0 auto;
     width: 100%;
     max-width: 1085px;
