@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: '[app-logo]',
+  selector: '[app-logo], app-logo',
   standalone: true,
   template: `
     <svg
