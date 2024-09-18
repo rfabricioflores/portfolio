@@ -1,4 +1,4 @@
-import { Component, HostBinding, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-experience',
@@ -6,12 +6,10 @@ import { Component, HostBinding, signal } from '@angular/core';
   templateUrl: './experience.component.html',
   styleUrl: './experience.component.scss',
   imports: [],
+  host: { class: 'wrapper' },
 })
 export default class ExperienceComponent {
-  @HostBinding('class')
-  readonly class = 'wrapper';
-
-  public accordionStatus = signal(false);
+  public _state = signal(false);
 
   public experiences = [
     {

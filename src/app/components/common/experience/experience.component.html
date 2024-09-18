@@ -1,27 +1,26 @@
+@let isOpen = _state();
+
 <section class="content">
   <h2>Experience</h2>
 
-  <div [class]="accordionStatus() ? 'accordion open' : 'accordion'">
+  <div class="accordion {{isOpen ? 'open' : ''}}">
     <div class="accordion-content">
-      <div class="line"></div>
-        <ul class="experience-list">
-          @for (exp of experiences; track $index) {
-            <li>
-              <h3>{{ exp.title }}</h3>
-              <h4>{{ exp.company }}</h4>
-              <p>{{ exp.description }}</p>
-            </li>
-          }
-        </ul>
-      </div>
+      <span class="line"></span>
+      <ul class="experience-list">
+        @for (exp of experiences; track $index) {
+          <li>
+            <h3>{{ exp.title }}</h3>
+            <h4>{{ exp.company }}</h4>
+            <p>{{ exp.description }}</p>
+          </li>
+        }
+      </ul>
     </div>
+  </div>
 
   <br>
-  <p (click)="accordionStatus.set(!accordionStatus())" style="cursor: pointer;">
-    @if(accordionStatus()) {
-      Hide
-    } @else {
-      Show all
-    }
+
+  <p (click)="_state.set(!isOpen)" style="cursor: pointer;">
+    {{isOpen ? 'Hide' : 'Show all'}}
   </p>
 </section>
