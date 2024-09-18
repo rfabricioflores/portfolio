@@ -1,9 +1,9 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   imports: [RouterLink],
-  selector: 'app-not-found',
+  selector: 'app-page-not-found',
   standalone: true,
   template: `
     <main class="content">
@@ -15,7 +15,6 @@ import { RouterLink } from '@angular/router';
     @use '~/colors' as *;
 
     :host {
-      display: block;
       background: $blue-dark-to-light;
 
       main {
@@ -31,8 +30,6 @@ import { RouterLink } from '@angular/router';
       }
     }
   `,
+  host: { class: 'wrapper' },
 })
-export default class NotFoundComponent {
-  @HostBinding('class')
-  readonly class = 'wrapper';
-}
+export default class PageNotFoundComponent {}
