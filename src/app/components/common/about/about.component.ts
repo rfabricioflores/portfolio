@@ -8,7 +8,7 @@ import { BorderComponent } from '@components/icons';
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
 })
-export class AboutComponent {
+export default class AboutComponent {
   @HostBinding('class')
   readonly class = 'wrapper';
 }
