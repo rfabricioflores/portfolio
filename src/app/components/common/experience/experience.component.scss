@@ -2,7 +2,6 @@
 @use '~/mixins' as *;
 
 :host {
-  display: block;
   background: $blue-light-to-dark;
 
   .content {

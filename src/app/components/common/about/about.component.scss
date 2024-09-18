@@ -2,7 +2,6 @@
 @use '~/mixins' as *;
 
 :host {
-  display: block;
   background: $blue-light-to-dark;
 
   .content {
@@ -60,10 +59,13 @@
         margin: 2rem 0 3rem 0;
       }
 
-      .btn {
-        width: 130px;
+      .info-buttons {
 
-        &:last-child {
+        .btn {
+          width: 130px;
+        }
+
+        :not(:first-child) {
           margin-left: 1rem;
         }
       }
