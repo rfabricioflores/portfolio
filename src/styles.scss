@@ -1,5 +1,7 @@
 @use '~/colors' as *;
+@use '~/mixins' as *;
 @use '/node_modules/slick-carousel/slick/slick.scss' as *;
+@use '/node_modules/slick-carousel/slick/slick-theme.scss' as *;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 ::-webkit-scrollbar {
@@ -78,4 +80,63 @@ button:disabled {
 [aria-disabled="true"] {
   opacity: 0.5;
   pointer-events: none;
+}
+
+// Custom Slick Carousel Dot Styles
+.slick-dotted.slick-slider {
+  margin-bottom: 0px;
+}
+
+.slick-dots {
+  position: absolute;
+  bottom: -25px;
+  list-style: none;
+  display: block;
+  text-align: center;
+  width: 100%;
+  li {
+      position: relative;
+      display: inline-block;
+      margin: 0 5px;
+      cursor: pointer;
+      button {
+          border: 0;
+          background: transparent;
+          display: block;
+          outline: none;
+          line-height: 0px;
+          font-size: 0px;
+          color: transparent;
+          padding: 5px;
+          cursor: pointer;
+          &:hover, &:focus {
+              outline: none;
+              &:before {
+                  opacity: $slick-opacity-on-hover;
+              }
+          }
+          &:before {
+              position: absolute;
+              top: 0;
+              left: 0;
+              content: $slick-dot-character;
+              width: 20px;
+              height: auto;
+              font-family: $slick-font-family;
+              font-size: 1.7rem;
+              line-height: 20px;
+              text-align: center;
+              color: $slick-dot-color;
+              opacity: $slick-opacity-not-active;
+              @include txt-purple-to-skyblue;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+          }
+      }
+      &.slick-active button:before {
+          @include txt-purple-to-skyblue;
+          color: $slick-dot-color-active;
+          opacity: $slick-opacity-default;
+      }
+  }
 }
