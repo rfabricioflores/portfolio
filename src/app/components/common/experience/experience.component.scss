@@ -40,6 +40,10 @@
       min-height: 100%;
       background: $purple-to-skyblue-to-bottom;
       border-radius: .5rem;
+
+      @include breakpoint(phone) {
+        width: .4rem;
+      }
     }
 
     .experience-list {
