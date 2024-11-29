@@ -13,6 +13,18 @@ export default class ExperienceComponent {
 
   public experiences = [
     {
+      title: 'Developer - Consultant in e-commerce',
+      description: `
+        • Development
+        • NextJS
+        • API development
+        • SEO, CRO, WCAG
+        • A/B testing
+      `,
+      company: 'Türnpuu Consulting AB',
+      date: '',
+    },
+    {
       title: 'System Developer',
       description: `
         • Web development
@@ -21,7 +33,7 @@ export default class ExperienceComponent {
         • Testing
         • A/B testing
       `,
-      company: 'Turnpuu Consulting AB',
+      company: 'Türnpuu Consulting AB',
       date: '',
     },
     {
