@@ -1,46 +1,67 @@
 <section class="content">
   <h2>Projects</h2>
-  @if(isBrowser) {
-    <div class="projects">
-      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" >
-        @for (project of projects; track $index) {
-          <article ngxSlickItem class="slide">
-            <img [src]="project.image" alt="project photo" class="image">
-            <h3>{{project.title}}</h3>
-            <p [innerHTML]="project.description"></p>
-            <div class="buttons">
-              @if (project.previewLink) {
-                <a class="btn" [href]="project.previewLink" target="_blank">Preview</a>
-              }
-              @if (project.sourceCode) {
-                <a class="btn" [href]="project.sourceCode" target="_blank">Github</a>
-              }
-            </div>
-            <app-icon-border class="bg" [strokeWidth]="1" position="up"/>
-          </article>
-        }
-      </ngx-slick-carousel>
-    </div>
+
+  @if (isServer) {
+  <div class="projects ssr">
+    <ng-container [ngTemplateOutlet]="carousel"/>
+  </div>
+  } @else {
+  <div class="projects">
+    <ng-container [ngTemplateOutlet]="carousel" />
+  </div>
   }
 
-  @if(isServer) {
-    <div class="projects ssr">
+  <ng-template #carousel>
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+      (afterChange)="afterChange($event)" (init)="init($event)">
       @for (project of projects; track $index) {
-        <article class="slide">
-          <img [src]="project.image" alt="project photo" class="image">
-          <h3>{{project.title}}</h3>
-          <p [innerHTML]="project.description"></p>
-          <div class="buttons">
-            @if (project.previewLink) {
-              <a class="btn" [href]="project.previewLink" target="_blank">Preview</a>
-            }
-            @if (project.sourceCode) {
-              <a class="btn" [href]="project.sourceCode" target="_blank">Github</a>
-            }
-          </div>
-          <app-icon-border class="bg" position="up"/>
-        </article>
+      <article ngxSlickItem class="slide">
+        <img [src]="project.image" alt="project photo" class="image">
+        <h3>{{project.title}}</h3>
+        <p [innerHTML]="project.description"></p>
+        <div class="buttons">
+          @if (project.previewLink) {
+          <a class="btn" [href]="project.previewLink" target="_blank">Preview</a>
+          }
+          @if (project.sourceCode) {
+          <a class="btn" [href]="project.sourceCode" target="_blank">Github</a>
+          }
+        </div>
+        <app-icon-border class="bg" [strokeWidth]="1" position="up" />
+      </article>
       }
-    </div>
-  }
+    </ngx-slick-carousel>
+
+    <!-- <button class="slick-prev" style="left: 0;" (click)="prev()" [ariaDisabled]="first()">
+      <svg style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 1; cursor: pointer;"
+        width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="35" rx="17.5" fill="url(#paint0_linear_65_206)" />
+        <path d="M23 23L21.5 24.5L10 18V17L21.5 10.5L23 12L20 17.5L23 23Z" fill="#FDFDFD" />
+        <defs>
+          <linearGradient id="paint0_linear_65_206" x1="18" y1="0" x2="18" y2="35" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#B786F5" />
+            <stop offset="1" stop-color="#76DFF7" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </button>
+
+    <button class="slick-next" style="right: 0;" (click)="next()"  [ariaDisabled]="last()">
+      <svg style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 1; cursor: pointer;"
+        width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="36.0007" y="34.9993" width="36" height="35" rx="17.5" transform="rotate(179.998 36.0007 34.9993)"
+          fill="url(#paint0_linear_65_207)" />
+        <path
+          d="M12.9998 12.0002L14.4997 10.5001L26 16.9996L26 17.9996L14.5003 24.5001L13.0002 23.0002L16 17.5L12.9998 12.0002Z"
+          fill="#FDFDFD" />
+        <defs>
+          <linearGradient id="paint0_linear_65_207" x1="54.0007" y1="34.9993" x2="54.0007" y2="69.9993"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#B786F5" />
+            <stop offset="1" stop-color="#76DFF7" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </button> -->
+  </ng-template>
 </section>

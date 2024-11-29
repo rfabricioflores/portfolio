@@ -1,7 +1,16 @@
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
-import { Component, HostBinding, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformServer, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  PLATFORM_ID,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
+import {
+  SlickCarouselComponent,
+  SlickCarouselModule,
+} from 'ngx-slick-carousel';
 import { BorderComponent } from '@components/icons';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 interface Project {
   title: string;
@@ -16,40 +25,60 @@ interface Project {
   standalone: true,
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
-  imports: [BorderComponent, SlickCarouselModule],
+  imports: [BorderComponent, SlickCarouselModule, NgTemplateOutlet],
+  host: { class: 'wrapper' },
 })
 export default class ProjectsComponent {
-  @HostBinding('class')
-  readonly class = 'wrapper';
-
   private platformId = inject(PLATFORM_ID);
 
-  get isBrowser() {
-    return isPlatformBrowser(this.platformId);
+  public get isServer() {
+    return isPlatformServer(this.platformId);
+  }
+  private slickModal = viewChild<SlickCarouselComponent>('slickModal');
+
+  // public first = signal(true);
+  // public last = signal(false);
+
+  afterChange(e: SlickAfterChangeEvent) {
+    // console.log(e);
+    // this.first.set(e.first);
+    // this.last.set(e.last);
   }
 
-  get isServer() {
-    return isPlatformServer(this.platformId);
+  init(e: SlickInitEvent) {
+    // console.log(e);
+  }
+
+  next() {
+    this.slickModal()?.slickNext();
+  }
+
+  prev() {
+    this.slickModal()?.slickPrev();
   }
 
   readonly slideConfig = {
     slidesToShow: 2.5,
-    slidesToScroll: 2,
+    // slidesToScroll: 2,
     infinite: false,
-    isServer: true,
+    isServer: this.isServer,
+    dots: true,
+    arrows: true,
+    swipeToSlide: true,
+    touchMove: true,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
+          // slidesToScroll: 2,
         },
       },
       {
         breakpoint: 600,
         settings: {
           slidesToShow: 1.1,
-          slidesToScroll: 1,
+          // slidesToScroll: 1,
         },
       },
     ],
@@ -124,11 +153,9 @@ export default class ProjectsComponent {
       </defs>
     </svg>
     `,
-    swipeToSlide: true,
-    touchMove: true,
   };
 
-  projects: Project[] = [
+  readonly projects: Project[] = [
     {
       title: 'Turnpuu Consulting Website',
       image: '/projects/turnpuu.webp',
@@ -163,7 +190,6 @@ export default class ProjectsComponent {
       image: '/projects/lulea-bio.webp',
       description:
         'A cinema booking website. Users can browse and book movies, with authentication to view their booking history. This app includes REST API, SSR, and E2E tests.',
-      previewLink: 'https://nextjs-bio.fabricioflores.se/',
       sourceCode: 'https://github.com/rfabricioflores/nextjs-bio-clone',
     },
     {
@@ -175,4 +201,17 @@ export default class ProjectsComponent {
       sourceCode: 'https://github.com/rfabricioflores/esc',
     },
   ];
+}
+
+interface SlickInitEvent {
+  event: any;
+  slick: any;
+}
+
+interface SlickAfterChangeEvent {
+  event: any;
+  slick: any;
+  currentSlide: number;
+  first: boolean;
+  last: boolean;
 }

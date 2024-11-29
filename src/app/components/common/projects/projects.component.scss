@@ -20,6 +20,7 @@ section {
 
   .projects {
     width: 100%;
+    position: relative;
 
     article {
       margin: 1rem;
@@ -52,9 +53,10 @@ section {
       >p {
         font-size: 15px;
         color: #D1D1D1;
-        max-height: calc(2 * 22px);
-        overflow: hidden;
-        text-overflow: ellipsis;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        margin-bottom: 30%;
+        overflow-y: auto;
       }
 
       .buttons {
@@ -77,12 +79,14 @@ section {
 
 
     &.ssr {
-      display: flex;
-      flex-direction: row;
-      overflow-x: auto;
+      >.carousel {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
 
-      article {
-        min-width: 25rem;
+        article {
+          min-width: 25rem;
+        }
       }
     }
   }
