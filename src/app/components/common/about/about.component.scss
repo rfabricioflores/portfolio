@@ -14,6 +14,7 @@
       position: relative;
       width: 260px;
       height: 300px;
+      pointer-events: none;
 
       @include breakpoint(tablet + phone) {
         width: 15rem;
@@ -21,6 +22,7 @@
       }
 
       >img {
+        border-radius: 1.2rem;
         position: relative;
         width: inherit;
         height: inherit;
