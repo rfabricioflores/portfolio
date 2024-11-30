@@ -14,17 +14,17 @@
       text-align: center;
     }
 
-    >div {
+    >.holder {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       padding-top: 5rem;
 
-      @include breakpoint(tablet + phone) {
-        padding-top: 1rem;
+      >section > .contact-svg {
+        width: 100%;
       }
 
-      .form {
+      >.form {
         display: flex;
         flex-direction: column;
         row-gap: 1rem;
@@ -78,6 +78,7 @@
 
       @include breakpoint(tablet + phone) {
         flex-direction: column;
+        padding-top: 1.5rem;
 
         .form {
           width: 100%;
