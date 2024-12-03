@@ -1,7 +1,7 @@
 @use '~/colors' as *;
 @use '~/mixins' as *;
 @use '/node_modules/slick-carousel/slick/slick.scss' as *;
-@use '/node_modules/slick-carousel/slick/slick-theme.scss' as *;
+// @use '/node_modules/slick-carousel/slick/slick-theme.scss' as *;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 ::-webkit-scrollbar {
@@ -82,6 +82,86 @@ button:disabled {
   pointer-events: none;
 }
 
+// Slick vavrs
+
+$slick-opacity-default: 0.75;
+$slick-opacity-on-hover: 1;
+$slick-opacity-not-active: 0.25;
+$slick-prev-character: "\2190";
+$slick-next-character: "\2192";
+$slick-dot-character: "\2022";
+$slick-dot-color: black;
+$slick-dot-color-active: $slick-dot-color;
+
+/* Slick Arrows */
+
+.slick-prev,
+.slick-next {
+    position: absolute;
+    display: block;
+    height: 20px;
+    width: 20px;
+    line-height: 0px;
+    font-size: 0px;
+    cursor: pointer;
+    background: transparent;
+    color: transparent;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    padding: 0;
+    border: none;
+    outline: none;
+    &:hover, &:focus {
+        outline: none;
+        background: transparent;
+        color: transparent;
+        &:before {
+            opacity: $slick-opacity-on-hover;
+        }
+    }
+    &.slick-disabled:before {
+        opacity: $slick-opacity-not-active;
+    }
+    &:before {
+        font-size: 20px;
+        line-height: 1;
+        color: black;
+        opacity: $slick-opacity-default;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+.slick-prev {
+  left: -25px;
+  [dir="rtl"] & {
+      left: auto;
+      right: -25px;
+  }
+  &:before {
+      content: $slick-prev-character;
+      [dir="rtl"] & {
+          content: $slick-next-character;
+      }
+  }
+}
+
+.slick-next {
+  right: -25px;
+  [dir="rtl"] & {
+      left: -25px;
+      right: auto;
+  }
+  &:before {
+      content: $slick-next-character;
+      [dir="rtl"] & {
+          content: $slick-prev-character;
+      }
+  }
+}
+
 // Custom Slick Carousel Dot Styles
 .slick-dotted.slick-slider {
   margin-bottom: 0px;
@@ -94,11 +174,13 @@ button:disabled {
   display: block;
   text-align: center;
   width: 100%;
+
   li {
       position: relative;
       display: inline-block;
       margin: 0 5px;
       cursor: pointer;
+
       button {
           border: 0;
           background: transparent;
@@ -109,12 +191,14 @@ button:disabled {
           color: transparent;
           padding: 5px;
           cursor: pointer;
+
           &:hover, &:focus {
               outline: none;
               &:before {
                   opacity: $slick-opacity-on-hover;
               }
           }
+
           &:before {
               position: absolute;
               top: 0;
@@ -122,7 +206,6 @@ button:disabled {
               content: $slick-dot-character;
               width: 20px;
               height: auto;
-              font-family: $slick-font-family;
               font-size: 1.7rem;
               line-height: 20px;
               text-align: center;
