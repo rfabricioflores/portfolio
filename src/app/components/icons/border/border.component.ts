@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-icon-border',
@@ -24,94 +24,62 @@ import { Component, OnInit, input } from '@angular/core';
         }"
       />
       <defs>
-        @switch(position()) { @case('up') {
+        @let position = gradientPosition();
         <linearGradient
           [id]="gradientId"
-          x1="100%"
-          y1="0%"
-          x2="100%"
-          y2="100%"
+          [attr.x1]="position.x1 + '%'"
+          [attr.y1]="position.y1 + '%'"
+          [attr.x2]="position.x2 + '%'"
+          [attr.y2]="position.y2 + '%'"
           gradientUnits="userSpaceOnUse"
         >
           <stop stop-color="#B786F5" stop-opacity="0.77" />
           <stop offset="1" stop-color="#1196CF" />
         </linearGradient>
-        } @case('down'){
-        <linearGradient
-          [id]="gradientId"
-          x1="0%"
-          y1="100%"
-          x2="0%"
-          y2="0%"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stop-color="#B786F5" stop-opacity="0.77" />
-          <stop offset="1" stop-color="#1196CF" />
-        </linearGradient>
-        } @case('diagonal'){
-        <linearGradient
-          [id]="gradientId"
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="100%"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stop-color="#B786F5" stop-opacity="0.77" />
-          <stop offset="1" stop-color="#1196CF" />
-        </linearGradient>
-        } @case('right'){
-        <linearGradient
-          [id]="gradientId"
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="0%"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stop-color="#B786F5" stop-opacity="0.77" />
-          <stop offset="1" stop-color="#1196CF" />
-        </linearGradient>
-        } @case('left') {
-        <linearGradient
-          [id]="gradientId"
-          x1="100%"
-          y1="0%"
-          x2="0%"
-          y2="0%"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stop-color="#B786F5" stop-opacity="0.77" />
-          <stop offset="1" stop-color="#1196CF" />
-        </linearGradient>
-        } @case ('reverse-diagonal') {
-        <linearGradient
-          [id]="gradientId"
-          x1="0%"
-          y1="100%"
-          x2="100%"
-          y2="0%"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stop-color="#B786F5" stop-opacity="0.77" />
-          <stop offset="1" stop-color="#1196CF" />
-        </linearGradient>
-        } }
       </defs>
     </svg>
   `,
   styleUrl: './border.component.scss',
 })
-export default class BorderComponent implements OnInit {
+export default class BorderComponent {
   public strokeWidth = input(2);
   public borderRadius = input(12);
   public position = input<
     'up' | 'down' | 'diagonal' | 'reverse-diagonal' | 'right' | 'left'
   >();
-  public gradientId: string = '';
 
-  ngOnInit() {
-    this.gradientId =
-      'linearGradient_' + Math.random().toString(36).substring(2, 9);
-  }
+  readonly gradientId =
+    'linearGradient_' + Math.random().toString(36).substring(2, 9);
+
+  readonly gradientPosition = computed<GradientPosition>(() => {
+    switch (this.position()) {
+      case 'up':
+        return { x1: 100, x2: 100, y1: 0, y2: 100 };
+
+      case 'down':
+        return { x1: 0, x2: 0, y1: 100, y2: 0 };
+
+      case 'diagonal':
+        return { x1: 0, x2: 100, y1: 0, y2: 100 };
+
+      case 'right':
+        return { x1: 0, x2: 100, y1: 0, y2: 0 };
+
+      case 'left':
+        return { x1: 100, x2: 0, y1: 0, y2: 0 };
+
+      case 'reverse-diagonal':
+        return { x1: 0, x2: 100, y1: 100, y2: 0 };
+
+      default:
+        return { x1: 100, x2: 100, y1: 0, y2: 100 };
+    }
+  });
+}
+
+interface GradientPosition {
+  x1: number;
+  x2: number;
+  y1: number;
+  y2: number;
 }
