@@ -7,6 +7,14 @@ import { resolve } from 'node:path';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ['legacy-js-api'],
+        api: 'modern-compiler',
+      },
+    },
+  },
   ssr: {
     noExternal: ['ngx-slick-carousel'],
   },
