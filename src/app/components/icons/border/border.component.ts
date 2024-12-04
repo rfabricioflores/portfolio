@@ -10,17 +10,18 @@ import { Component, computed, input } from '@angular/core';
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
+      @let borderWidth = strokeWidth();
       <rect
-        [attr.x]="strokeWidth() / 2"
-        [attr.y]="strokeWidth() / 2"
+        [attr.x]="borderWidth / 2"
+        [attr.y]="borderWidth / 2"
         [attr.rx]="borderRadius()"
         [attr.stroke]="'url(#' + gradientId + ')'"
-        [attr.stroke-width]="strokeWidth()"
+        [attr.stroke-width]="borderWidth"
         width="100%"
         height="100%"
         [style]="{
-          width: 'calc(100% - ' + strokeWidth() + 'px)',
-          height: 'calc(100% - ' + strokeWidth() + 'px)'
+          width: 'calc(100% - ' + borderWidth + 'px)',
+          height: 'calc(100% - ' + borderWidth + 'px)'
         }"
       />
       <defs>
@@ -33,8 +34,8 @@ import { Component, computed, input } from '@angular/core';
           [attr.y2]="position.y2 + '%'"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B786F5" stop-opacity="0.77" />
-          <stop offset="1" stop-color="#1196CF" />
+          <stop [attr.stop-color]="startColor()" stop-opacity="1" />
+          <stop offset="1" [attr.stop-color]="endColor()" stop-opacity="1" />
         </linearGradient>
       </defs>
     </svg>
@@ -44,6 +45,8 @@ import { Component, computed, input } from '@angular/core';
 export default class BorderComponent {
   public strokeWidth = input(2);
   public borderRadius = input(12);
+  public startColor = input('#B786F5');
+  public endColor = input('#1196CF');
   public position = input<
     'up' | 'down' | 'diagonal' | 'reverse-diagonal' | 'right' | 'left'
   >();
