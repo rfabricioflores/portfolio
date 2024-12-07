@@ -29,6 +29,14 @@ export const routeMeta: RouteMeta = {
       property: 'og:image',
       content: 'https://fabricioflores.se/og-image.png',
     },
+    {
+      property: 'og:image:width',
+      content: '1200',
+    },
+    {
+      property: 'og:image:height',
+      content: '630',
+    },
   ],
 };
 
