@@ -11,7 +11,24 @@ import {
 export const routeMeta: RouteMeta = {
   meta: [
     { name: 'title', content: 'Fabricio Flores' },
-    { name: 'description', content: 'Fabricio Flores - Full Stack Developer' },
+    {
+      name: 'description',
+      content:
+        'A skilled developer with a passion for creating visually appealing and user-friendly websites. Expert in various programming languages and technologies to bring ideas to life.',
+    },
+    {
+      property: 'og:title',
+      content: 'Fabricio Flores - Full Stack Developer',
+    },
+    {
+      property: 'og:description',
+      content:
+        'A skilled developer with a passion for creating visually appealing and user-friendly websites. Expert in various programming languages and technologies to bring ideas to life.',
+    },
+    {
+      property: 'og:image',
+      content: 'https://fabricioflores.se/og-image.png',
+    },
   ],
 };
 
