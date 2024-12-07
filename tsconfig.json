@@ -18,13 +18,19 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": ["ES2022", "dom"],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "useDefineForClassFields": false,
     "skipLibCheck": true,
     "paths": {
-      "~/*": ["src/app/styles/*"],
-      "@components/*": ["src/app/components/*"],
-      "@assets/*": ["src/assets/*"],
+      "@components/*": [
+        "src/app/components/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
     }
   },
   "angularCompilerOptions": {

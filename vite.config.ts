@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import analog from '@analogjs/platform';
 import { normalizePath } from 'vite';
 import { resolve } from 'node:path';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -26,11 +27,10 @@ export default defineConfig(({ mode }) => ({
     mainFields: ['module'],
     alias: {
       '~': normalizePath(resolve(__dirname, 'src/app/styles')),
-      '@components': normalizePath(resolve(__dirname, 'src/app/components')),
-      '@assets': normalizePath(resolve(__dirname, 'src/assets')),
     },
   },
   plugins: [
+    tsconfigPaths(),
     analog({
       nitro: {
         serveStatic: false,
