@@ -49,7 +49,9 @@ nav {
       display: flex;
       column-gap: 1.2rem;
 
-      > li > a > img {
+      > li > a {
+        position: relative;
+        display: block;
         width: 1.6rem;
         height: 1.6rem;
       }
@@ -86,7 +88,7 @@ nav {
         justify-content: space-around;
         align-items: flex-end;
 
-        >li > a > img {
+        >li > a {
           width: 2rem;
           height: 2rem;
         }
