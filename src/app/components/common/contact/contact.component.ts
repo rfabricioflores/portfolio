@@ -3,14 +3,13 @@ import { Component, inject, signal } from '@angular/core';
 import { BorderComponent } from '@components/icons';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
-  imports: [BorderComponent, ReactiveFormsModule, CommonModule],
+  imports: [BorderComponent, ReactiveFormsModule],
   host: {
     class: 'wrapper',
   },
