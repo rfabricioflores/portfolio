@@ -34,8 +34,8 @@ import { Component, computed, input } from '@angular/core';
           [attr.y2]="position.y2 + '%'"
           gradientUnits="userSpaceOnUse"
         >
-          <stop [attr.stop-color]="startColor()" stop-opacity="1" />
-          <stop offset="1" [attr.stop-color]="endColor()" stop-opacity="1" />
+          <stop [attr.stop-color]="color().start" stop-opacity="1" />
+          <stop offset="1" [attr.stop-color]="color().end" stop-opacity="1" />
         </linearGradient>
       </defs>
     </svg>
@@ -45,8 +45,23 @@ import { Component, computed, input } from '@angular/core';
 export default class BorderComponent {
   public strokeWidth = input(2);
   public borderRadius = input(12);
-  public startColor = input('#B786F5');
-  public endColor = input('#1196CF');
+  public startColor = input<string | null>(null);
+  public endColor = input<string | null>(null);
+  public solidColor = input<string | null>(null);
+
+  public color = computed(() => {
+    if (this.solidColor())
+      return {
+        start: this.solidColor(),
+        end: this.solidColor(),
+      };
+
+    return {
+      start: this.startColor() || '#B786F5',
+      end: this.endColor() || '#1196CF',
+    };
+  });
+
   public position = input<
     'up' | 'down' | 'diagonal' | 'reverse-diagonal' | 'right' | 'left'
   >();
