@@ -40,17 +40,16 @@
           position: relative;
           width: 100%;
           padding: 2px;
-          overflow: hidden;
           border-radius: 14px;
 
-          input, textarea {
+          >input, >textarea {
             font-size: inherit;
-            color: white;
+            color: rgba(255, 255, 255, 0.897);
             width: 100%;
             height: 100%;
             appearance: none;
             outline: none;
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0);
             border: none;
             padding: 1rem 1rem;
 
@@ -73,6 +72,42 @@
           textarea {
             resize: none;
           }
+
+          >label {
+            transition: all .3s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 1rem 1rem;
+            pointer-events: none;
+            font-size: inherit;
+            opacity: .5;
+          }
+
+          > input:focus + label,
+          > input.ng-dirty + label,
+          > input.ng-touched + label,
+          > textarea:focus + label,
+          > textarea.ng-dirty + label,
+          > textarea.ng-touched + label {
+            margin-bottom: 45px;
+            top: -45px;
+            left: 0;
+            opacity: 1;
+            padding: 1rem 0;
+          }
+
+          // Apply styles to the parent ".input"
+          &:has(> input:focus),
+          &:has(> input.ng-dirty),
+          &:has(> input.ng-touched),
+          &:has(> textarea:focus),
+          &:has(> textarea.ng-dirty),
+          &:has(> textarea.ng-touched) {
+            margin-top: 35px;
+          }
         }
       }
 
@@ -84,6 +119,13 @@
           width: 100%;
         }
       }
+    }
+
+
+    .input-error {
+      display: block;
+      padding-top: .4rem;
+      color: rgb(158, 143, 55);
     }
   }
 }

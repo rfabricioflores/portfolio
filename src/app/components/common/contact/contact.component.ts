@@ -1,38 +1,61 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostBinding, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { BorderComponent } from '@components/icons';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
-  imports: [BorderComponent, ReactiveFormsModule],
+  imports: [BorderComponent, ReactiveFormsModule, CommonModule],
+  host: {
+    class: 'wrapper',
+  },
 })
 export default class ContactComponent {
-  @HostBinding('class')
-  readonly class = 'wrapper';
-
   private http = inject(HttpClient);
   private formBuilder = inject(FormBuilder);
 
-  public contactForm!: FormGroup;
+  public contactForm = this.formBuilder.group({
+    name: ['', [Validators.required, Validators.maxLength(80)]],
+    email: [
+      '',
+      [Validators.required, Validators.email, Validators.maxLength(100)],
+    ],
+    message: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(20),
+        Validators.maxLength(400),
+      ],
+    ],
+  });
+
   public isLoading = signal(false);
   public message = signal<string | null>(null);
 
-  constructor() {
-    this.contactForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      message: ['', Validators.required],
-    });
+  getFieldErrors(name: string): string[] | null {
+    const control = this.contactForm.get(name);
+    if (!control || !control.errors) return null;
+
+    const isDirty = control.dirty;
+    const isValid = control.valid;
+
+    if (isDirty && !isValid) {
+      const errors = Object.keys(control.errors).map((key) =>
+        errorMessages[key]
+          ? errorMessages[key]
+          : `Validation of type "${key}" failed.`
+      );
+
+      return errors;
+    }
+
+    return null;
   }
 
   submitForm() {
@@ -59,3 +82,10 @@ export default class ContactComponent {
       });
   }
 }
+
+const errorMessages: { [key: string]: string } = {
+  required: "This field can't be empty.",
+  email: 'Please enter a valid email address.',
+  minlength: 'Text is too short.',
+  maxlength: 'Text is too long.',
+};

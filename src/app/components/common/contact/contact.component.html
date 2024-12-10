@@ -32,20 +32,41 @@
     </section>
 
     <form class="form" [formGroup]="contactForm" (ngSubmit)="submitForm()">
-      <div class="input">
-        <input type="text" name="name" placeholder="Name *" formControlName="name">
-        <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
+      <div>
+        <div class="input">
+          <input type="text" name="name" formControlName="name">
+          <label>Name *</label>
+          <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
+        </div>
+
+        @for(nameError of getFieldErrors("name"); track $index) {
+          <small class="input-error">⚠️ {{nameError}}</small>
+        }
       </div>
 
-      <div class="input">
-        <input type="text" placeholder="Email *" formControlName="email">
-        <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
+      <div>
+        <div class="input">
+          <input type="text" name="email" formControlName="email">
+          <label>Email *</label>
+          <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right" />
+        </div>
+
+        @for(emailError of getFieldErrors("email"); track $index) {
+          <small class="input-error">⚠️ {{emailError}}</small>
+        }
       </div>
 
-      <div class="input">
-        <textarea type="text" placeholder="Your message *" rows="6" formControlName="message"></textarea>
-        <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
+      <div>
+        <div class="input">
+          <textarea type="text" rows="6" name="text" formControlName="message"></textarea>
+          <label>Your message *</label>
+          <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
+        </div>
+        @for(messageError of getFieldErrors("message"); track $index) {
+          <small class="input-error">⚠️ {{messageError}}</small>
+        }
       </div>
+
       <button class="btn" [disabled]="(contactForm.invalid || isLoading())" >
         @if(isLoading()) {
           Sending...
