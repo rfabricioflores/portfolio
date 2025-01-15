@@ -3,7 +3,7 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  ViewChild,
+  viewChild,
 } from '@angular/core';
 
 export interface TechIcon {
@@ -19,8 +19,7 @@ export interface TechIcon {
   host: { class: 'wrapper' },
 })
 export default class HeaderComponent implements OnDestroy {
-  @ViewChild('techs')
-  private base!: ElementRef<HTMLElement>;
+  public base = viewChild.required<ElementRef<HTMLElement>>('techs');
   private radius = 0;
   private icons: TechIcon[] = [];
   private resizeObserver: ResizeObserver | null = null;
@@ -29,9 +28,9 @@ export default class HeaderComponent implements OnDestroy {
     afterNextRender(() => {
       this.run();
       this.resizeObserver = new ResizeObserver(
-        () => (this.radius = this.base.nativeElement.offsetWidth / 2)
+        () => (this.radius = this.base().nativeElement.offsetWidth / 2)
       );
-      this.resizeObserver.observe(this.base.nativeElement);
+      this.resizeObserver.observe(this.base().nativeElement);
     });
   }
 
@@ -40,8 +39,8 @@ export default class HeaderComponent implements OnDestroy {
   }
 
   private run() {
-    this.radius = this.base.nativeElement.offsetWidth / 2;
-    const children = Array.from(this.base.nativeElement.children);
+    this.radius = this.base().nativeElement.offsetWidth / 2;
+    const children = Array.from(this.base().nativeElement.children);
 
     this.icons = children.map((el, index) => {
       const angle = (index / children.length) * 360;
@@ -49,7 +48,7 @@ export default class HeaderComponent implements OnDestroy {
       return { el, angle };
     });
 
-    this.base.nativeElement.style.opacity = '1';
+    this.base().nativeElement.style.opacity = '1';
 
     this.icons.forEach((icon) => {
       setInterval(() => {
