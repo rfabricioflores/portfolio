@@ -62,15 +62,35 @@ header {
       transition: all 200ms linear;
     }
 
+
     @include breakpoint(tablet + phone) {
-      margin-top: 1rem;
-      transform: translateY(40%);
-      width: 90%;
-      height: 20vh;
+      transition: unset;
+      margin-top: 4rem;
+      margin-bottom: 2rem;
+      max-width: unset;
+      max-height: unset;
+      height: auto;
+      width: 100%;
+
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+
+      .scroll-container {
+        display: flex;
+        will-change: transform;
+        transform: translateX(0);
+      }
+
+      img {
+        position: static;
+        width: 2.5rem;
+        height: 2.5rem;
+        flex-shrink: 0;
+      }
     }
   }
 }
-
 
 @keyframes rotate{
   to{ transform: rotate(-360deg); }

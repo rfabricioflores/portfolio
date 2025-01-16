@@ -5,11 +5,7 @@ import {
   OnDestroy,
   viewChild,
 } from '@angular/core';
-
-export interface TechIcon {
-  el: Element;
-  angle: number;
-}
+import { RotateAnimation, ScrollAnimation, Animation } from './animation';
 
 @Component({
   selector: 'app-header',
@@ -19,54 +15,31 @@ export interface TechIcon {
   host: { class: 'wrapper' },
 })
 export default class HeaderComponent implements OnDestroy {
-  public base = viewChild.required<ElementRef<HTMLElement>>('techs');
-  private radius = 0;
-  private icons: TechIcon[] = [];
-  private resizeObserver: ResizeObserver | null = null;
+  private iconListRef = viewChild.required<ElementRef<HTMLElement>>('techs');
+  private animation: Animation<HTMLElement> | null = null;
 
   constructor() {
     afterNextRender(() => {
-      this.run();
-      this.resizeObserver = new ResizeObserver(
-        () => (this.radius = this.base().nativeElement.offsetWidth / 2)
-      );
-      this.resizeObserver.observe(this.base().nativeElement);
+      const mediaQuery = window.matchMedia('(max-width: 1023px)');
+      this.handleResonsiveAnimation(mediaQuery.matches);
+
+      mediaQuery.addEventListener('change', (event) => {
+        this.handleResonsiveAnimation(event.matches);
+      });
     });
+  }
+
+  handleResonsiveAnimation(isMobile: boolean) {
+    if (isMobile) {
+      this.animation?.destroy();
+      this.animation = new ScrollAnimation(this.iconListRef().nativeElement);
+    } else {
+      this.animation?.destroy();
+      this.animation = new RotateAnimation(this.iconListRef().nativeElement);
+    }
   }
 
   ngOnDestroy() {
-    this.resizeObserver && this.resizeObserver.disconnect();
-  }
-
-  private run() {
-    this.radius = this.base().nativeElement.offsetWidth / 2;
-    const children = Array.from(this.base().nativeElement.children);
-
-    this.icons = children.map((el, index) => {
-      const angle = (index / children.length) * 360;
-      this.calcPosition({ el, angle });
-      return { el, angle };
-    });
-
-    this.base().nativeElement.style.opacity = '1';
-
-    this.icons.forEach((icon) => {
-      setInterval(() => {
-        icon.angle -= 5;
-        if (icon.angle === 360) icon.angle = 0;
-        this.calcPosition(icon);
-      }, 200);
-    });
-  }
-
-  private calcPosition({ el, angle }: TechIcon) {
-    let xPos = Math.cos((angle * Math.PI) / 180) * this.radius;
-    let yPos = Math.sin((angle * Math.PI) / 180) * this.radius;
-    xPos += this.radius;
-    yPos += this.radius;
-
-    const style = `left: calc(${xPos}px - ${el.clientWidth / 2}px);
-    top: calc(${yPos}px - ${el.clientHeight / 2}px);`;
-    el.setAttribute('style', style);
+    this.animation?.destroy();
   }
 }
