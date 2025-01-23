@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { BorderComponent } from '@components/icons';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
+import { catchError, finalize, map, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-contact',
@@ -37,9 +37,9 @@ export default class ContactComponent {
   public isLoading = signal(false);
   public message = signal<string | null>(null);
 
-  getFieldErrors(name: string): string[] | null {
+  getFieldErrors(name: string): string[] {
     const control = this.contactForm.get(name);
-    if (!control || !control.errors) return null;
+    if (!control || !control.errors) return [];
 
     const isDirty = control.dirty;
     const isValid = control.valid;
@@ -54,31 +54,31 @@ export default class ContactComponent {
       return errors;
     }
 
-    return null;
+    return [];
   }
 
+  private timeout: ReturnType<typeof setTimeout> | null = null;
+
   submitForm() {
-    if (this.contactForm.invalid) return;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
     this.message.set(null);
     this.isLoading.set(true);
 
     this.http
       .post('https://api.fabricioflores.se/contact', this.contactForm.value)
       .pipe(
+        tap(() => this.contactForm.reset()),
+        map(() => "✅ Thank you! I'll be in touch with you."),
+        catchError(() => of('❌ Something went nuts, please try again.')),
         finalize(() => {
           this.isLoading.set(false);
+          this.timeout = setTimeout(() => this.message.set(null), 1000 * 10);
         })
       )
-      .subscribe({
-        next: () => {
-          this.message.set("✅ Thank you! I'll be in touch with you.");
-          this.contactForm.reset();
-        },
-        error: (e) => {
-          console.log(e);
-          this.message.set('❌ Something went nuts, please try again.');
-        },
-      });
+      .subscribe((message) => this.message.set(message));
   }
 }
 
