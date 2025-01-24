@@ -2,14 +2,25 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { BorderComponent } from '@components/icons';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { catchError, finalize, map, of, tap } from 'rxjs';
+import {
+  catchError,
+  finalize,
+  map,
+  of,
+  startWith,
+  switchMap,
+  tap,
+  timer,
+} from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
-  imports: [BorderComponent, ReactiveFormsModule],
+  imports: [BorderComponent, ReactiveFormsModule, AsyncPipe],
   host: {
     class: 'wrapper',
   },
@@ -18,7 +29,7 @@ export default class ContactComponent {
   private http = inject(HttpClient);
   private formBuilder = inject(FormBuilder);
 
-  public contactForm = this.formBuilder.group({
+  public contactForm = this.formBuilder.nonNullable.group({
     name: ['', [Validators.required, Validators.maxLength(80)]],
     email: [
       '',
@@ -34,10 +45,20 @@ export default class ContactComponent {
     ],
   });
 
-  public isLoading = signal(false);
-  public message = signal<string | null>(null);
+  public formLoading = signal(false);
+  private formResponse = signal<string | null>(null);
+  public formNotification$ = toObservable(this.formResponse).pipe(
+    switchMap((message) =>
+      message
+        ? timer(1000 * 8).pipe(
+            startWith(message),
+            map((v) => v || null)
+          )
+        : of(null)
+    )
+  );
 
-  getFieldErrors(name: string): string[] {
+  public formControlErrors(name: keyof typeof this.contactForm.controls) {
     const control = this.contactForm.get(name);
     if (!control || !control.errors) return [];
 
@@ -57,28 +78,20 @@ export default class ContactComponent {
     return [];
   }
 
-  private timeout: ReturnType<typeof setTimeout> | null = null;
-
-  submitForm() {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-      this.timeout = null;
-    }
-    this.message.set(null);
-    this.isLoading.set(true);
+  public submitForm() {
+    this.formResponse.set(null);
+    this.formLoading.set(true);
+    const body = this.contactForm.getRawValue();
 
     this.http
-      .post('https://api.fabricioflores.se/contact', this.contactForm.value)
+      .post('https://api.fabricioflores.se/contact', body)
       .pipe(
         tap(() => this.contactForm.reset()),
         map(() => "✅ Thank you! I'll be in touch with you."),
         catchError(() => of('❌ Something went nuts, please try again.')),
-        finalize(() => {
-          this.isLoading.set(false);
-          this.timeout = setTimeout(() => this.message.set(null), 1000 * 10);
-        })
+        finalize(() => this.formLoading.set(false))
       )
-      .subscribe((message) => this.message.set(message));
+      .subscribe(this.formResponse.set);
   }
 }
 

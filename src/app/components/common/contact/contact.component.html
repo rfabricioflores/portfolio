@@ -39,7 +39,7 @@
           <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
         </div>
 
-        @for(nameError of getFieldErrors("name"); track $index) {
+        @for(nameError of formControlErrors("name"); track $index) {
           <small class="input-error">⚠️ {{nameError}}</small>
         }
       </div>
@@ -51,7 +51,7 @@
           <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right" />
         </div>
 
-        @for(emailError of getFieldErrors("email"); track $index) {
+        @for(emailError of formControlErrors("email"); track $index) {
           <small class="input-error">⚠️ {{emailError}}</small>
         }
       </div>
@@ -62,20 +62,17 @@
           <label>Your message *</label>
           <app-icon-border  [borderRadius]="12" [strokeWidth]="2" position="right"/>
         </div>
-        @for(messageError of getFieldErrors("message"); track $index) {
+        @for(messageError of formControlErrors("message"); track $index) {
           <small class="input-error">⚠️ {{messageError}}</small>
         }
       </div>
 
-      <button class="btn" [disabled]="(contactForm.invalid || isLoading())" >
-        @if(isLoading()) {
-          Sending...
-        } @else {
-          Send
-        }
+      <button class="btn" [disabled]="(contactForm.invalid || formLoading())" >
+        {{formLoading() ? 'Sending...' : 'Send'}}
       </button>
-      @if (message()) {
-        <p>{{message()}}</p>
+
+      @if (formNotification$ | async; as formNotification) {
+        <p>{{formNotification}}</p>
       }
     </form>
   </div>
