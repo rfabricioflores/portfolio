@@ -5,7 +5,9 @@
   background: $blue-light-to-dark;
 
   .content {
+    min-height: fit-content;
     height: 60vh;
+    padding: 5rem 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
