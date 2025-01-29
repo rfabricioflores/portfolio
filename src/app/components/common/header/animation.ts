@@ -18,6 +18,7 @@ export class RotateAnimation<List extends HTMLElement>
   constructor(private list: List) {
     this.list.style.opacity = '1';
     this.radius = list.offsetWidth / 2;
+    this.list.style.height = `${list.offsetWidth}px`;
 
     const children = Array.from(list.children);
 
@@ -36,9 +37,10 @@ export class RotateAnimation<List extends HTMLElement>
       this.intervals.push(interval);
     });
 
-    this.resizeObserver = new ResizeObserver(
-      () => (this.radius = this.list.offsetWidth / 2)
-    );
+    this.resizeObserver = new ResizeObserver(() => {
+      this.radius = this.list.offsetWidth / 2;
+      this.list.style.height = `${list.offsetWidth}px`;
+    });
     this.resizeObserver.observe(this.list);
   }
 
@@ -76,6 +78,7 @@ export class ScrollAnimation<List extends HTMLElement>
 
   constructor(private list: List) {
     this.list.style.opacity = '1';
+    this.list.style.removeProperty('height');
     this.resizeObserver = new ResizeObserver(() => this.handleResize());
     this.resizeObserver.observe(this.list);
 
