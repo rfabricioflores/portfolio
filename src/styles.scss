@@ -72,6 +72,8 @@ button:disabled {
   background: $purple-to-skyblue;
   padding: 1rem 2.5rem;
   font-weight: 600;
+  width: fit-content;
+  display: block;
 
   &:hover, &:focus {
     filter: brightness(1.1);
