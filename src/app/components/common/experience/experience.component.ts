@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 
 @Component({
@@ -5,7 +6,7 @@ import { Component, signal } from '@angular/core';
   standalone: true,
   templateUrl: './experience.component.html',
   styleUrl: './experience.component.scss',
-  imports: [],
+  imports: [DatePipe],
   host: { class: 'wrapper' },
 })
 export default class ExperienceComponent {
@@ -13,7 +14,18 @@ export default class ExperienceComponent {
 
   public experiences = [
     {
-      title: 'Developer - Consultant in e-commerce',
+      title: 'Fullstack Developer',
+      description: `
+        • Angular
+        • Spring Boot
+        • SQL
+        • Digital design
+      `,
+      company: 'Sverok Admin AB',
+      startDate: new Date('2025-02-17'),
+    },
+    {
+      title: 'E-commerce Dev Consultant',
       description: `
         • Development
         • NextJS
@@ -22,7 +34,7 @@ export default class ExperienceComponent {
         • A/B testing
       `,
       company: 'Türnpuu Consulting AB',
-      date: '',
+      startDate: new Date('2024-08-01'),
     },
     {
       title: 'System Developer',
@@ -34,7 +46,7 @@ export default class ExperienceComponent {
         • A/B testing
       `,
       company: 'Türnpuu Consulting AB',
-      date: '',
+      startDate: new Date('2024-01-01'),
     },
     {
       title: 'Technician / Salesperson',
@@ -45,7 +57,7 @@ export default class ExperienceComponent {
       • Mentored new hires, providing guidance & support
       `,
       company: 'Fix My Phone',
-      date: '',
+      startDate: new Date('2021-12-01'),
     },
     {
       title: 'Technician / Salesperson',
@@ -55,7 +67,7 @@ export default class ExperienceComponent {
       • Inventory and other administrative tasks
       `,
       company: 'PHONEIX',
-      date: '',
+      startDate: new Date('2021-06-01'),
     },
     {
       title: 'CMS Developer & Technician',
@@ -65,7 +77,7 @@ export default class ExperienceComponent {
       • Electronics repair
       `,
       company: 'Mimmi Electronics',
-      date: '',
+      startDate: new Date('2020-01-01'),
     },
   ];
 }

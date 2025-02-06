@@ -9,8 +9,9 @@
       <ul class="experience-list">
         @for (exp of experiences; track $index) {
           <li>
-            <h3>{{ exp.title }}</h3>
-            <h4>{{ exp.company }}</h4>
+            <span class="date">{{ exp.startDate | date }}</span>
+            <h3 class="title">{{ exp.title }}</h3>
+            <h4 class="company">{{ exp.company }}</h4>
             <p>{{ exp.description }}</p>
           </li>
         }

@@ -20,8 +20,12 @@
   margin-top: 3rem;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 20rem;
+  grid-template-rows: 40vh;
   transition: all .2s ease-out;
+
+  @include breakpoint(phone) {
+    grid-template-rows: 65vh;
+  }
 
   &.open {
     margin-bottom: 0rem;
@@ -55,12 +59,22 @@
       >li {
         position: relative;
 
-        h4, p {
+        .date {
+          display: block;
           color: #D1D1D1;
+          margin-bottom: .5rem;
         }
 
-        h3 {
+        h3.title {
           font-weight: 600;
+        }
+
+        h4.company {
+          margin: .2rem 0 .8rem 0;
+        }
+
+        p {
+          color: #D1D1D1;
         }
 
         &::before {
