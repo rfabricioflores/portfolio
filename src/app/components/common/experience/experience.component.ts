@@ -1,12 +1,13 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgOptimizedImage } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import ExpandableText from '../expandable-text/expandable-text.component';
 
 @Component({
   selector: 'app-experience',
   standalone: true,
   templateUrl: './experience.component.html',
   styleUrl: './experience.component.scss',
-  imports: [DatePipe],
+  imports: [DatePipe, NgOptimizedImage, ExpandableText],
   host: { class: 'wrapper' },
 })
 export default class ExperienceComponent {
@@ -23,30 +24,33 @@ export default class ExperienceComponent {
       `,
       company: 'Sverok Admin AB',
       startDate: new Date('2025-02-17'),
+      image: '/companies/sverokadmin.png',
     },
     {
       title: 'E-commerce Dev Consultant',
       description: `
-        • Development
-        • NextJS
-        • API development
-        • SEO, CRO, WCAG
-        • A/B testing
+      • Development
+      • NextJS
+      • API development
+      • SEO, CRO, WCAG
+      • A/B testing
       `,
       company: 'Türnpuu Consulting AB',
       startDate: new Date('2024-08-01'),
+      image: '/companies/turnpuu.png',
     },
     {
       title: 'System Developer',
       description: `
-        • Web development
-        • Web design
-        • API development
-        • Testing
-        • A/B testing
+      • Web development
+      • Web design
+      • API development
+      • Testing
+      • A/B testing
       `,
       company: 'Türnpuu Consulting AB',
       startDate: new Date('2024-01-01'),
+      image: '/companies/turnpuu.png',
     },
     {
       title: 'Technician / Salesperson',
@@ -58,6 +62,7 @@ export default class ExperienceComponent {
       `,
       company: 'Fix My Phone',
       startDate: new Date('2021-12-01'),
+      image: '/companies/fixmyphone.png',
     },
     {
       title: 'Technician / Salesperson',
@@ -68,6 +73,7 @@ export default class ExperienceComponent {
       `,
       company: 'PHONEIX',
       startDate: new Date('2021-06-01'),
+      image: '/companies/phoneix.png',
     },
     {
       title: 'CMS Developer & Technician',
@@ -78,6 +84,7 @@ export default class ExperienceComponent {
       `,
       company: 'Mimmi Electronics',
       startDate: new Date('2020-01-01'),
+      image: '/companies/mimmi.png',
     },
   ];
 }

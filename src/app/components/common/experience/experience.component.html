@@ -9,10 +9,16 @@
       <ul class="experience-list">
         @for (exp of experiences; track $index) {
           <li>
-            <span class="date">{{ exp.startDate | date }}</span>
-            <h3 class="title">{{ exp.title }}</h3>
-            <h4 class="company">{{ exp.company }}</h4>
-            <p>{{ exp.description }}</p>
+            <div class="logo">
+              <img [ngSrc]="exp.image" alt="{{exp.company.toLowerCase()}} logo" fill/>
+            </div>
+            <div class="exp-content">
+              <span class="date">{{ exp.startDate | date }}</span>
+              <h3 class="title">{{ exp.title }}</h3>
+              <h4 class="company">&#64; {{ exp.company }}</h4>
+
+              <app-expandable-text [text]="exp.description"/>
+            </div>
           </li>
         }
       </ul>
