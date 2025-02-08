@@ -8,15 +8,15 @@ import { afterNextRender, Component, ElementRef, input, signal, viewChild } from
   template: `
   @let expanded = isExpanded();
 
-  <p #textContainer [ngClass]="{'expanded': expanded}">
-      <ng-content/>
-      {{text()}}
+  <p #textElement [ngClass]="{'expanded': expanded}">
+    <ng-content/>
+    {{text()}}
   </p>
 
-  @if(showExpandButton()) {
+  @if(hasHiddenContent()) {
     <span class="toggle-btn" (click)="toggle()">
-    {{ expanded ? '... show less' : '... show more' }}
-  </span>
+      {{ expanded ? 'show less' : '... show more' }}
+    </span>
   }
   `,
   styles: `
@@ -33,6 +33,7 @@ import { afterNextRender, Component, ElementRef, input, signal, viewChild } from
     >p {
       color: #D1D1D1;
       display: -webkit-box;
+      display: -moz-box;
       line-clamp: 2;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -51,24 +52,35 @@ import { afterNextRender, Component, ElementRef, input, signal, viewChild } from
   `,
 })
 export default class ExpandableText {
-  public showExpandButton = signal(false);
+  public text = input<string>();
+  public hasHiddenContent = signal(false);
   public isExpanded = signal(false);
 
-  public text = input<string>();
-  public textCont = viewChild<ElementRef<HTMLParagraphElement>>('textContainer')
+  public textElementRef = viewChild.required<ElementRef<HTMLParagraphElement>>('textElement')
+  private observer: ResizeObserver | null = null;
 
   public toggle() {
+    this.textElementRef().nativeElement.setAttribute('trigger', 'toggle');
     this.isExpanded.update((val) => !val);
   }
 
   constructor() {
     afterNextRender(() => {
-      const cont = this.textCont()?.nativeElement;
-      if(!cont) return;
+      // Observe text element for changes
+      this.observer = new ResizeObserver((entries) => {
+        const textEl = entries[0].target;
+        const isFromToggle = textEl.getAttribute('trigger') === 'toggle';
 
-      const hasHiddenContent = cont.scrollHeight > cont.clientHeight
+        if(isFromToggle) return textEl.removeAttribute('trigger');
 
-      this.showExpandButton.set(hasHiddenContent);
+        this.isExpanded.set(false); // Reset the state
+        this.hasHiddenContent.set(textEl.scrollHeight > textEl.clientHeight);
+      });
+      this.observer.observe(this.textElementRef().nativeElement);
     })
+  }
+
+  ngOnDestroy() {
+    this.observer?.disconnect();
   }
 }
